@@ -1,0 +1,13 @@
+﻿proc iml;
+p={0.4,0.3,0.2,0.1};
+N=1000;
+call randseed(234,1); x=randfun(N,'table',p);
+x=x-J(N,1,1);
+print (x[1:10]);
+create d from x[colname={'x'}];
+append from x;
+quit;
+proc univariate data=d plot freq;
+var x;
+histogram / midpoints=0,1,2,3 interbar=10 cfill=blue;
+run;
